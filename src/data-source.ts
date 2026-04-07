@@ -8,6 +8,7 @@ import { Property } from './properties/entities/property.entity';
 import { Unit } from './units/entities/unit.entity';
 import { Tenant } from './tenants/entities/tenant.entity';
 import { Lease } from './leases/entities/lease.entity';
+import { Payment } from './payments/entities/payment.entity';
 
 config(); // Manually loads the .env file for the CLI
 
@@ -18,7 +19,16 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [User, UserRole, UserRoleAssignment, Property, Unit, Tenant, Lease], // Addall your entities here
+  entities: [
+    User,
+    UserRole,
+    UserRoleAssignment,
+    Property,
+    Unit,
+    Tenant,
+    Lease,
+    Payment,
+  ], // Addall your entities here
   migrations: ['dist/migrations/*.js'], // CLI reads the compiled JS files
   synchronize: false, // Always false when using migrations
   logging: true,

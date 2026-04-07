@@ -106,7 +106,7 @@ created_at
 updated_at
 📆 BILLINGS (WHAT SHOULD BE PAID)
 
-billings - to be perfomed 
+billings - done
 
 id
 lease_id
@@ -122,7 +122,7 @@ status                 // unpaid, partially_paid, paid, overdue
 created_at
 💰 PAYMENTS (WHAT WAS PAID)
 
-payments
+payments - to be performed
 
 id
 payment_code           // PAY-0001

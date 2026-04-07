@@ -9,6 +9,7 @@ import { UnitsModule } from './units/units.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { LeasesModule } from './leases/leases.module';
 import { BillingsModule } from './billings/billings.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { BillingsModule } from './billings/billings.module';
     TenantsModule,
     LeasesModule,
     BillingsModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

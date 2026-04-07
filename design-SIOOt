@@ -1,14 +1,14 @@
 PARTMENT SYSTEM — DATA DICTIONARY
 👥 ROLES
 
-roles
+roles - done
 
 id
 name                // admin, staff, tenant
 description
 created_at
 
-user_roles
+user_roles - done
 
 id
 user_id
@@ -16,7 +16,7 @@ role_id
 assigned_at
 🏢 PROPERTIES (BUILDINGS)
 
-properties
+properties - done
 
 id
 name
@@ -32,7 +32,7 @@ created_at
 updated_at
 🚪 UNITS (APARTMENTS)
 
-units
+units - to be implemented
 
 id
 property_id

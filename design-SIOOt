@@ -32,7 +32,7 @@ created_at
 updated_at
 🚪 UNITS (APARTMENTS)
 
-units - to be implemented
+units - done 
 
 id
 property_id
@@ -49,7 +49,7 @@ created_at
 updated_at
 🧍 TENANTS
 
-tenants
+tenants - to be implemented
 
 id
 user_id

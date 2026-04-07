@@ -1,0 +1,191 @@
+PARTMENT SYSTEM — DATA DICTIONARY
+👥 ROLES
+
+roles
+
+id
+name                // admin, staff, tenant
+description
+created_at
+
+user_roles
+
+id
+user_id
+role_id
+assigned_at
+🏢 PROPERTIES (BUILDINGS)
+
+properties
+
+id
+name
+code                    // e.g. APT-001
+address_line
+city
+province
+postal_code
+country
+total_units            // optional cached value
+status                 // active, inactive
+created_at
+updated_at
+🚪 UNITS (APARTMENTS)
+
+units
+
+id
+property_id
+unit_number            // e.g. 101, A-2
+floor
+bedrooms
+bathrooms
+area_sqm
+monthly_rent
+security_deposit
+status                 // available, occupied, reserved, maintenance
+is_active
+created_at
+updated_at
+🧍 TENANTS
+
+tenants
+
+id
+user_id
+tenant_code            // internal ID like TNT-0001
+
+phone_number
+alternate_phone
+
+date_of_birth
+gender
+
+government_id_type     // passport, national_id
+government_id_number
+
+employment_status      // employed, self-employed, student
+employer_name
+monthly_income
+
+emergency_contact_name
+emergency_contact_phone
+emergency_contact_relation
+
+move_in_date
+notes
+
+created_at
+updated_at
+📄 LEASES (CORE TABLE)
+
+leases
+
+id
+lease_code             // LEASE-0001
+
+unit_id
+tenant_id
+
+start_date
+end_date
+actual_end_date        // if ended early
+
+monthly_rent
+security_deposit
+advance_payment_amount
+
+payment_due_day        // e.g. 5 = every 5th of month
+
+status                 // pending, active, ended, terminated
+termination_reason
+
+created_by             // user_id (admin/staff)
+
+created_at
+updated_at
+📆 BILLINGS (WHAT SHOULD BE PAID)
+
+billings
+
+id
+lease_id
+
+billing_period_start
+billing_period_end
+
+amount_due
+due_date
+
+status                 // unpaid, partially_paid, paid, overdue
+
+created_at
+💰 PAYMENTS (WHAT WAS PAID)
+
+payments
+
+id
+payment_code           // PAY-0001
+
+lease_id
+
+amount
+payment_date
+due_date
+
+payment_method         // cash, bank_transfer, gcash
+reference_number
+
+status                 // pending, paid, failed, overdue
+
+paid_by_user_id        // staff/admin who recorded
+
+notes
+
+created_at
+updated_at
+🔧 MAINTENANCE REQUESTS
+
+maintenance_requests
+
+id
+request_code
+
+unit_id
+tenant_id
+
+title
+description
+
+priority               // low, medium, high
+status                 // open, assigned, in_progress, resolved, closed
+
+assigned_to            // staff user_id
+
+reported_at
+resolved_at
+
+notes
+🔗 RELATIONSHIPS (MENTAL MODEL)
+User → Tenant (1:1 optional)
+User → Roles (many-to-many)
+
+Property → Units (1:N)
+
+Unit → Leases (1:N over time)
+Tenant → Leases (1:N)
+
+Lease → Billings (1:N)
+Lease → Payments (1:N)
+
+Unit → Maintenance Requests (1:N)
+Tenant → Maintenance Requests (1:N)
+⚡ WHERE BullMQ FITS (later, not now)
+
+Design already supports:
+
+- Generate monthly billings automatically
+- Send rent reminders before due_date
+- Mark overdue billings
+- Notify maintenance updates
+- Generate receipts (PDF async)

@@ -8,6 +8,7 @@ import { PropertiesModule } from './properties/properties.module';
 import { UnitsModule } from './units/units.module';
 import { TenantsModule } from './tenants/tenants.module';
 import { LeasesModule } from './leases/leases.module';
+import { BillingsModule } from './billings/billings.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { LeasesModule } from './leases/leases.module';
     UnitsModule,
     TenantsModule,
     LeasesModule,
+    BillingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

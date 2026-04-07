@@ -79,7 +79,7 @@ created_at
 updated_at
 📄 LEASES (CORE TABLE)
 
-leases - to be performed
+leases - done
 
 id
 lease_code             // LEASE-0001
@@ -106,7 +106,7 @@ created_at
 updated_at
 📆 BILLINGS (WHAT SHOULD BE PAID)
 
-billings
+billings - to be perfomed 
 
 id
 lease_id

@@ -4,6 +4,7 @@ import { config } from 'dotenv';
 import { User } from './users/entities/user.entity';
 import { UserRoleAssignment } from './users/entities/user-role-assignment.entity';
 import { UserRole } from './users/entities/user-role.entity';
+import { Property } from './properties/entities/property.entity';
 
 config(); // Manually loads the .env file for the CLI
 
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [User, UserRole, UserRoleAssignment], // Add all your entities here
+  entities: [User, UserRole, UserRoleAssignment, Property], // Addall your entities here
   migrations: ['dist/migrations/*.js'], // CLI reads the compiled JS files
   synchronize: false, // Always false when using migrations
   logging: true,

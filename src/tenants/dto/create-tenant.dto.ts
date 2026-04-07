@@ -13,9 +13,6 @@ import {
 } from '../entities/tenant.entity';
 
 export class CreateTenantDto {
-  @IsInt()
-  user_id: number;
-
   @IsString()
   tenant_code: string;
 

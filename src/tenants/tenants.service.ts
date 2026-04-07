@@ -16,7 +16,6 @@ export class TenantsService {
   create(createTenantDto: CreateTenantDto) {
     const tenant = this.tenantRepository.create({
       ...createTenantDto,
-      user: { id: createTenantDto.user_id },
       created_by: createTenantDto.created_by ? { id: createTenantDto.created_by } : undefined,
     });
     return this.tenantRepository.save(tenant);
@@ -50,8 +49,9 @@ export class TenantsService {
     const tenant = await this.tenantRepository.preload({
       id,
       ...updateTenantDto,
-      user: updateTenantDto.user_id ? { id: updateTenantDto.user_id } : undefined,
-      created_by: updateTenantDto.created_by ? { id: updateTenantDto.created_by } : undefined,
+      created_by: updateTenantDto.created_by
+        ? { id: updateTenantDto.created_by }
+        : undefined,
     });
     if (!tenant) throw new NotFoundException(`Tenant #${id} not found`);
     return this.tenantRepository.save(tenant);

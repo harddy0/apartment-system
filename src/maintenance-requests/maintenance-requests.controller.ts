@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { MaintenanceRequestsService } from './maintenance-requests.service';
 import { CreateMaintenanceRequestDto } from './dto/create-maintenance-request.dto';
@@ -28,23 +29,23 @@ export class MaintenanceRequestsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.maintenanceRequestsService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.maintenanceRequestsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateMaintenanceRequestDto: UpdateMaintenanceRequestDto,
   ) {
     return this.maintenanceRequestsService.update(
-      +id,
+      id,
       updateMaintenanceRequestDto,
     );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.maintenanceRequestsService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.maintenanceRequestsService.remove(id);
   }
 }

@@ -1,46 +1,49 @@
 import {
-	IsInt,
-	IsString,
-	IsEnum,
-	IsOptional,
-	IsDateString,
-	Length,
+  IsInt,
+  IsString,
+  IsEnum,
+  IsOptional,
+  IsDateString,
+  Length,
 } from 'class-validator';
-import { MaintenancePriority, MaintenanceStatus } from '../entities/maintenance-request.entity';
+import {
+  MaintenancePriority,
+  MaintenanceStatus,
+} from '../entities/maintenance-request.entity';
 
 export class CreateMaintenanceRequestDto {
-	@IsString()
-	@Length(1, 20)
-	request_code: string;
+  @IsString()
+  @Length(1, 20)
+  request_code: string;
 
-	@IsInt()
-	unit_id: number;
+  @IsInt()
+  unit_id: number;
 
-	@IsInt()
-	tenant_id: number;
+  @IsInt()
+  tenant_id: number;
 
-	@IsString()
-	@Length(1, 100)
-	title: string;
+  @IsString()
+  @Length(1, 100)
+  title: string;
 
-	@IsString()
-	description: string;
+  @IsString()
+  description: string;
 
-	@IsEnum(MaintenancePriority)
-	priority: MaintenancePriority;
+  @IsEnum(MaintenancePriority)
+  priority: MaintenancePriority;
 
-	@IsEnum(MaintenanceStatus)
-	@IsOptional()
-	status?: MaintenanceStatus;
+  @IsEnum(MaintenanceStatus)
+  @IsOptional()
+  status?: MaintenanceStatus;
 
-	@IsOptional()
-	@IsInt()
-	assigned_to?: number;
+  @IsOptional()
+  @IsInt()
+  assigned_to?: number;
 
-	@IsDateString()
-	reported_at: string;
+  @IsDateString()
+  reported_at: string;
 
-	@IsOptional()
-	@IsDateString()
-	resolved_at?: string;
+  @IsOptional()
+  @IsDateString()
+  resolved_at?: string;
 }

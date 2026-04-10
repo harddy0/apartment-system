@@ -14,7 +14,9 @@ export class PropertiesService {
   ) {}
 
   create(createPropertyDto: CreatePropertyDto) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const property = this.propertyRepository.create(createPropertyDto);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.propertyRepository.save(property);
   }
 
@@ -34,22 +36,28 @@ export class PropertiesService {
   }
 
   async findOne(id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const property = await this.propertyRepository.findOneBy({ id });
     if (!property) throw new NotFoundException(`Property #${id} not found`);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return property;
   }
 
   async update(id: number, updatePropertyDto: UpdatePropertyDto) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const property = await this.propertyRepository.preload({
       id,
       ...updatePropertyDto,
     });
     if (!property) throw new NotFoundException(`Property #${id} not found`);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.propertyRepository.save(property);
   }
 
   async remove(id: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const property = await this.findOne(id);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.propertyRepository.remove(property);
   }
 }

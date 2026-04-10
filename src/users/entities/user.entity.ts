@@ -1,8 +1,10 @@
+import { Tenant } from '../../tenants/entities/tenant.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('users')
@@ -24,4 +26,7 @@ export class User {
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt!: Date;
+
+  @OneToMany(() => Tenant, (tenant) => tenant.created_by)
+  tenants?: Tenant[];
 }

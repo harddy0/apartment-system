@@ -41,14 +41,17 @@ export class PaymentsService {
   ): Promise<Payment> {
     const payment = await this.paymentRepository.findOne({ where: { id } });
     if (!payment) throw new NotFoundException(`Payment #${id} not found`);
-    if (updatePaymentDto.lease_id) payment.lease = { id: updatePaymentDto.lease_id } as Lease;
-    if (updatePaymentDto.paid_by_user_id) payment.paid_by_user = { id: updatePaymentDto.paid_by_user_id } as User;
+    if (updatePaymentDto.lease_id)
+      payment.lease = { id: updatePaymentDto.lease_id } as Lease;
+    if (updatePaymentDto.paid_by_user_id)
+      payment.paid_by_user = { id: updatePaymentDto.paid_by_user_id } as User;
     Object.assign(payment, updatePaymentDto);
     return this.paymentRepository.save(payment);
   }
 
   async remove(id: number): Promise<void> {
     const result = await this.paymentRepository.delete(id);
-    if (result.affected === 0) throw new NotFoundException(`Payment #${id} not found`);
+    if (result.affected === 0)
+      throw new NotFoundException(`Payment #${id} not found`);
   }
 }

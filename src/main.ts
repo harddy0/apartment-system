@@ -15,10 +15,20 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('My API')
-    .setDescription('API documentation')
+    .setTitle('Apartment System API')
+    .setDescription(
+      'REST API documentation for property, tenancy, billing, payments, and maintenance operations.',
+    )
     .setVersion('1.0')
-    .addBearerAuth() // optional (JWT)
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        description: 'Provide access token in format: Bearer <token>',
+      },
+      'access-token',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

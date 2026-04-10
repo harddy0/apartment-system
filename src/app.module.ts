@@ -10,6 +10,7 @@ import { TenantsModule } from './tenants/tenants.module';
 import { LeasesModule } from './leases/leases.module';
 import { BillingsModule } from './billings/billings.module';
 import { PaymentsModule } from './payments/payments.module';
+import { MaintenanceRequestsModule } from './maintenance-requests/maintenance-requests.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { PaymentsModule } from './payments/payments.module';
     LeasesModule,
     BillingsModule,
     PaymentsModule,
+    MaintenanceRequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

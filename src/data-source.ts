@@ -9,6 +9,7 @@ import { Unit } from './units/entities/unit.entity';
 import { Tenant } from './tenants/entities/tenant.entity';
 import { Lease } from './leases/entities/lease.entity';
 import { Payment } from './payments/entities/payment.entity';
+import { MaintenanceRequest } from './maintenance-requests/entities/maintenance-request.entity';
 
 config(); // Manually loads the .env file for the CLI
 
@@ -28,6 +29,7 @@ export const AppDataSource = new DataSource({
     Tenant,
     Lease,
     Payment,
+    MaintenanceRequest,
   ], // Addall your entities here
   migrations: ['dist/migrations/*.js'], // CLI reads the compiled JS files
   synchronize: false, // Always false when using migrations

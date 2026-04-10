@@ -16,7 +16,9 @@ export class TenantsService {
   create(createTenantDto: CreateTenantDto) {
     const tenant = this.tenantRepository.create({
       ...createTenantDto,
-      created_by: createTenantDto.created_by ? { id: createTenantDto.created_by } : undefined,
+      created_by: createTenantDto.created_by
+        ? { id: createTenantDto.created_by }
+        : undefined,
     });
     return this.tenantRepository.save(tenant);
   }
@@ -24,7 +26,13 @@ export class TenantsService {
   findAll(query: PaginateQuery) {
     return paginate(query, this.tenantRepository, {
       sortableColumns: ['id', 'tenant_code', 'created_at', 'updated_at'],
-      searchableColumns: ['tenant_code', 'phone_number', 'government_id_number', 'employer_name', 'emergency_contact_name'],
+      searchableColumns: [
+        'tenant_code',
+        'phone_number',
+        'government_id_number',
+        'employer_name',
+        'emergency_contact_name',
+      ],
       filterableColumns: {
         gender: true,
         employment_status: true,
@@ -35,12 +43,15 @@ export class TenantsService {
       defaultSortBy: [['created_at', 'DESC']],
       defaultLimit: 10,
       maxLimit: 50,
-      relations: ['user', 'created_by'],
+      relations: ['created_by'],
     });
   }
 
   async findOne(id: number) {
-    const tenant = await this.tenantRepository.findOne({ where: { id }, relations: ['user', 'created_by'] });
+    const tenant = await this.tenantRepository.findOne({
+      where: { id },
+      relations: ['created_by'],
+    });
     if (!tenant) throw new NotFoundException(`Tenant #${id} not found`);
     return tenant;
   }

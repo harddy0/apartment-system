@@ -1,46 +1,84 @@
 import {
-	IsInt,
-	IsString,
-	IsEnum,
-	IsOptional,
-	IsDateString,
-	Length,
+  IsInt,
+  IsString,
+  IsEnum,
+  IsOptional,
+  IsDateString,
+  Length,
 } from 'class-validator';
-import { MaintenancePriority, MaintenanceStatus } from '../entities/maintenance-request.entity';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  MaintenancePriority,
+  MaintenanceStatus,
+} from '../entities/maintenance-request.entity';
 
 export class CreateMaintenanceRequestDto {
-	@IsString()
-	@Length(1, 20)
-	request_code: string;
+  @ApiProperty({
+    description: 'Unique maintenance request code',
+    example: 'MR-2026-0001',
+    maxLength: 20,
+  })
+  @IsString()
+  @Length(1, 20)
+  request_code: string;
 
-	@IsInt()
-	unit_id: number;
+  @ApiProperty({ description: 'Unit id for which maintenance is reported', example: 1 })
+  @IsInt()
+  unit_id: number;
 
-	@IsInt()
-	tenant_id: number;
+  @ApiProperty({ description: 'Tenant id reporting the issue', example: 2 })
+  @IsInt()
+  tenant_id: number;
 
-	@IsString()
-	@Length(1, 100)
-	title: string;
+  @ApiProperty({ description: 'Short issue title', example: 'Leaking kitchen sink', maxLength: 100 })
+  @IsString()
+  @Length(1, 100)
+  title: string;
 
-	@IsString()
-	description: string;
+  @ApiProperty({
+    description: 'Detailed description of the maintenance issue',
+    example: 'Water is dripping continuously under the sink cabinet.',
+  })
+  @IsString()
+  description: string;
 
-	@IsEnum(MaintenancePriority)
-	priority: MaintenancePriority;
+  @ApiProperty({
+    description: 'Issue priority level',
+    enum: MaintenancePriority,
+    example: MaintenancePriority.HIGH,
+  })
+  @IsEnum(MaintenancePriority)
+  priority: MaintenancePriority;
 
-	@IsEnum(MaintenanceStatus)
-	@IsOptional()
-	status?: MaintenanceStatus;
+  @ApiPropertyOptional({
+    description: 'Current workflow status',
+    enum: MaintenanceStatus,
+    example: MaintenanceStatus.OPEN,
+  })
+  @IsEnum(MaintenanceStatus)
+  @IsOptional()
+  status?: MaintenanceStatus;
 
-	@IsOptional()
-	@IsInt()
-	assigned_to?: number;
+  @ApiPropertyOptional({
+    description: 'Assigned maintenance staff user id',
+    example: 5,
+  })
+  @IsOptional()
+  @IsInt()
+  assigned_to?: number;
 
-	@IsDateString()
-	reported_at: string;
+  @ApiProperty({
+    description: 'Issue report datetime in ISO format',
+    example: '2026-04-10T09:30:00.000Z',
+  })
+  @IsDateString()
+  reported_at: string;
 
-	@IsOptional()
-	@IsDateString()
-	resolved_at?: string;
+  @ApiPropertyOptional({
+    description: 'Resolution datetime in ISO format',
+    example: '2026-04-12T15:00:00.000Z',
+  })
+  @IsOptional()
+  @IsDateString()
+  resolved_at?: string;
 }

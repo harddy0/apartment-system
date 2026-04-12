@@ -27,6 +27,7 @@ export class User {
   @CreateDateColumn({ type: 'timestamp' })
   createdAt!: Date;
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   @OneToMany(() => Tenant, (tenant) => tenant.created_by)
   tenants?: Tenant[];
 }
